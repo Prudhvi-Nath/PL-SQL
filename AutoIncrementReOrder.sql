@@ -44,3 +44,4 @@ create or replace function autoincrreorder
                  end;
 /
 insert into customers values(autoincrreorder(),’prudhvi’);
+commit;
