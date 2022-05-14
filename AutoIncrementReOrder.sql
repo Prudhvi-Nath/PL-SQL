@@ -19,21 +19,22 @@ create or replace function autoincrreorder
                                        dbms_output.put_line(counter);
                                         if (counter>1)then
                                                  dbms_output.put_line('If loop Executing');
+                    
                                                         EXECUTE IMMEDIATE q'{
                                                         declare
                                                            i number(37):=0;
                                                          begin
-                                                           for x in  (select * from customers) loop
-                                                           dbms_output.put_line(x.id||'--'||x.name);
+                                                           for x in  (select rowid,customers.* from customers) loop
+                                                           dbms_output.put_line(x.rowid||'--'||x.id||'--'||x.name);
                                                             i:=i+1;
                                                            dbms_output.put_line(i);
-                                                           update customers set id=i where name=x.name;
+                                                           update customers set id=i where rowid=x.rowid;
                                                            end loop;
                                                          end;}';
                                         end if;
                                    return counter;
                                   EXCEPTION
-                                      
+                                       
                                         WHEN table_does_not_exist then
                                         dbms_output.put_line('table dose not exists');
                                          return 1;
@@ -41,7 +42,21 @@ create or replace function autoincrreorder
                                           dbms_output.put_line('No data found');
                                           return 1;
                                end;
+         /*call the function after deleting the any rows in between the records,by calling the function it will rearrange the records in table by update statement */
                  end;
+                
 /
+
 insert into customers values(autoincrreorder(),’prudhvi’);
+insert into customers values(autoincrreorder(),’Ram’);
+insert into customers values(autoincrreorder(),’Vijay’);
+insert into customers values(autoincrreorder(),’vamsi’);
+insert into customers values(autoincrreorder(),’sreekanth’);
+insert into customers values(autoincrreorder(),’Ravinder’);
+insert into customers values(autoincrreorder(),’sahiti’);
+insert into customers values(autoincrreorder(),’Lakshmi’);
 commit;
+delete from customers where id=3;
+commit;
+variable n1 number;
+exec :n1:=autoincrreorder();
