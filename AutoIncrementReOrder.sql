@@ -2,6 +2,8 @@ drop table customers  purge;
 create table customers(id number(30),name varchar2(37));
 alter table customers add  constraint pk_name_customers primary key(name);
 
+set serveroutput on
+
 create or replace function autoincrreorder
                                          return number  is
                           begin
