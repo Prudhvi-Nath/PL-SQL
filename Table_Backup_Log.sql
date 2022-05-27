@@ -99,7 +99,7 @@ cursor cur_empbackup is select * from emp_backup;
          for x in (select * from emp_backup) loop
              if (x.empno_old=x.empno_new and x.ename_old=x.ename_new and x.job_old=x.job_new and x.mgr_old=x.mgr_new and x.hiredate_old=x.hiredate_new and x.sal_old=x.sal_new and x
 .comm_old=x.comm_new and x.deptno_old=x.deptno_new) then
-             delete from emp_backup where (x.empno_new=x.empno_new and x.ename_old=x.ename_new and x.job_old=x.job_new and x.mgr_old=x.mgr_new and x.hiredate_old=x.hiredate_new and
+             delete from emp_backup where (x.empno_old=x.empno_new and x.ename_old=x.ename_new and x.job_old=x.job_new and x.mgr_old=x.mgr_new and x.hiredate_old=x.hiredate_new and
  x.sal_old=x.sal_new and x.comm_old=x.comm_new and x.deptno_old=x.deptno_new);
              dbms_output.put_line(x.empno_old||'==='||x.empno_new);
            else
