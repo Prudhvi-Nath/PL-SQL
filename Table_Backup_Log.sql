@@ -16,6 +16,8 @@ CREATE TABLE EMP
         SAL NUMBER(7, 2),
         COMM NUMBER(7, 2),
         DEPTNO NUMBER(2));
+      
+alter table emp add constraint pk_emp_empno primary key(EMPNO);
 
 INSERT INTO EMP VALUES
         (7369, 'SMITH',  'CLERK',     7902,
@@ -61,6 +63,7 @@ INSERT INTO EMP VALUES
         TO_DATE('23-JAN-1982', 'DD-MON-YYYY'), 1300, NULL, 10);
 
 COMMIT;
+
         
 create table emp_backup(empno_old number(4),empno_new number(4),ename_old varchar2(10),ename_new varchar2(10),job_old varchar2(9),job_new varchar2(9),mgr_old number(4),mgr_new number(4),hiredate_old date,hiredate_new date,sal_old number(7,2),sal_new number(7,2),comm_old number(7,2),comm_new number(7,2),deptno_old number(2),deptno_new number(2),updated_time TIMESTAMP DEFAULT SYSTIMESTAMP,username varchar2(20));
 
